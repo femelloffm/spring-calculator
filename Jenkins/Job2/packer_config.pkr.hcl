@@ -45,7 +45,7 @@ build {
   }
 
   provisioner "ansible" {
-    playbook_file = "./Job2/job2_playbook.yml"
+    playbook_file = "./Jenkins/Job2/job2_playbook.yml"
     user = "root"
   }
 
