@@ -30,7 +30,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
-archivesBaseName = 'springCalculator'
+archivesBaseName = 'spring-calculator'
 
 task uberJar(type: Jar) {
     manifest.attributes(['Main-Class':'org.femelloffm.cloudnative.tema1.Main'])
