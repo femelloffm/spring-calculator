@@ -1,0 +1,20 @@
+- name: Provision Docker container
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install JDK 8
+      apt:
+        name: openjdk-8-jre-headless
+    - name: Install Tomcat
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.55/bin/apache-tomcat-9.0.55.tar.gz
+        dest: /usr/local/
+    - name: Extract Tomcat
+      shell:
+        chdir: /usr/local/
+        cmd: tar -xvf apache-tomcat-9.0.55.tar.gz
+    - name: Rename Tomcat Folder
+      shell:
+        chdir: /usr/local/
+        cmd: mv apache-tomcat-9.0.55/ tomcat-9/

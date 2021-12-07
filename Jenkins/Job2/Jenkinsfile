@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('Download WAR') {
+            steps {
+                rtDownload {
+                    serverId: 'artifactory-instance',
+                    spec: """{
+                            "files": [
+                                    {
+                                        "pattern": "spring-calculator-local/org/femelloffm/spring-calculator/1.0/spring-calculator-1.0.war",
+                                        "target": "spring-calculator-1.0.war"
+                                    }
+                                ]
+                            }"""
+                }
+            }
+        }
+        stage('Build and push container image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh 'packer init ./Jenkins/Job2/packer_config.pkr.hcl'
+                    sh "packer build --var docker_username=$DOCKER_USERNAME --var docker_password=$DOCKER_PASSWORD ./Jenkins/Job2/packer_config.pkr.hcl"
+                }
+            }
+        }
+    }
+}

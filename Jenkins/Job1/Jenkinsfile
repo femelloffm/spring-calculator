@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clear old repository') {
+            when {
+                expression {
+                    return fileExists('spring-calculator')
+                }
+            }
+            steps {
+                sh 'rm -rf spring-calculator/'
+            }
+        }
+        stage('Clone Github repository') {
+            steps {
+                sh 'git clone https://github.com/femelloffm/spring-calculator.git'
+            }
+        }
+        stage('Run tests and build WAR') {
+            steps {
+                sh 'cd spring-calculator/ && gradle build'
+            }
+        }
+        stage('Upload to JFrog') {
+            steps {
+                rtUpload {
+                    serverId: 'artifactory-instance',
+                    spec: """{
+                            "files": [
+                                    {
+                                        "pattern": "spring-calculator/build/libs/*.war",
+                                        "target": "spring-calculator-local/org/femelloffm/spring-calculator/1.0/spring-calculator-1.0.war"
+                                    }
+                                ]
+                            }"""
+                }
+            }
+        }
+    }
+}
