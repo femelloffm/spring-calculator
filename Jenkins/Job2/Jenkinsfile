@@ -9,7 +9,7 @@ pipeline {
                             "files": [
                                     {
                                         "pattern": "spring-calculator-local/org/femelloffm/spring-calculator/1.0/spring-calculator-1.0.war",
-                                        "target": "spring-calculator-1.0.war"
+                                        "target": "./spring-calculator-1.0.war"
                                     }
                                 ]
                             }"""
