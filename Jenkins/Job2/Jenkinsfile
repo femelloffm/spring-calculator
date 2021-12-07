@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Download WAR') {
             steps {
-                rtDownload {
-                    serverId: 'artifactory-instance',
+                rtDownload (
+                    serverId: "artifactory-instance",
                     spec: """{
                             "files": [
                                     {
@@ -13,7 +13,7 @@ pipeline {
                                     }
                                 ]
                             }"""
-                }
+                )
             }
         }
         stage('Build and push container image') {

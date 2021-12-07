@@ -23,8 +23,8 @@ pipeline {
         }
         stage('Upload to JFrog') {
             steps {
-                rtUpload {
-                    serverId: 'artifactory-instance',
+                rtUpload (
+                    serverId: "artifactory-instance",
                     spec: """{
                             "files": [
                                     {
@@ -33,7 +33,7 @@ pipeline {
                                     }
                                 ]
                             }"""
-                }
+                )
             }
         }
     }
