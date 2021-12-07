@@ -50,7 +50,7 @@ build {
   }
 
   provisioner "file" {
-    source      = "spring-calculator-1.0.war"
+    source      = "calculator-war/spring-calculator-1.0.war"
     destination = "${var.tomcat_home}/webapps/"
   }
 

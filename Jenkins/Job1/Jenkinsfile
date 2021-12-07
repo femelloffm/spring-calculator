@@ -29,7 +29,7 @@ pipeline {
                             "files": [
                                     {
                                         "pattern": "spring-calculator/build/libs/*.war",
-                                        "target": "spring-calculator-local/org/femelloffm/spring-calculator/1.0/"
+                                        "target": "spring-calculator-local/calculator-war/"
                                     }
                                 ]
                             }"""
